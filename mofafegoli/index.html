@@ -1,0 +1,52 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="app">
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			.on {
+				background-color: hotpink;
+			}
+		</style>
+		<title></title>
+	</head>
+	
+	<body ng-controller="MainCtrl as main">
+		<input type="text" ng-model="main.query" />
+		<output>{{ main.convert(main.query) }} </output>
+		
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th ng-repeat="vowel in main.vowels">{{ vowel }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="c in main.consonants">
+					<th>{{ c }}</th>
+					<td ng-class="{ on: main.isOn(c+v)}" ng-repeat="v in main.vowels">{{ main.convert(c+v) }}</td>
+				</tr>
+			</tbody>
+			<tr>
+		</table>
+	
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="http://mofafego.li/mofafegoli.js"></script>
+		<script>
+			var app = angular.module('app', []);
+			app.controller('MainCtrl', function() {
+				this.query = 'toto';
+				//alias
+				this.convert = mofafegoli.convert;
+				
+				this.vowels = mofafegoli.vowels;
+				this.consonants = mofafegoli.consonants;
+				
+				this.isOn = function(syl) {
+					var input = isNaN(this.query) ? this.query : this.convert(this.query);
+					return input.includes(syl)
+				}
+			})
+		</script>
+	</body>
+</html>
