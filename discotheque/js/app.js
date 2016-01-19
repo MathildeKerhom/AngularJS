@@ -30,4 +30,7 @@ function generateAlbums(count) {
 	return albums;
 }
 // angular
-var app = angular.module('app', ["ngMessages"]);
+var app = angular.module('app', [
+	"ngMessages",
+	"ngRoute"
+]);
