@@ -1,0 +1,120 @@
+<input placeholder="Search in all" ng-model="main.search.$">
+<h2>Hardcoded</h2>
+	<table>
+		<thead>
+			<tr>
+				<th ng-click="main.orderPredicate='id'; main.orderReverse=!main.orderReverse">
+					<span ng-show="main.orderPredicate=='id' && main.orderReverse == false">&#x25B4;</span>
+					id
+					<span ng-show="main.orderPredicate=='id' && main.orderReverse == true">&#x25BE;</span>
+				</th>
+				<th ng-click="main.orderPredicate='artiste'; main.orderReverse=!main.orderReverse">
+					<span ng-show="main.orderPredicate=='artiste' && main.orderReverse == false">&#x25B4;</span>
+					artiste
+					<span ng-show="main.orderPredicate=='artiste' && main.orderReverse == true">&#x25BE;</span>
+				</th>
+				<th ng-click="main.orderPredicate='title'; main.orderReverse=!main.orderReverse">
+					<span>&#x25B4;</span>
+					title
+					<span>&#x25BE;</span>
+				</th>
+				<th ng-click="main.orderPredicate='year'; main.orderReverse=!main.orderReverse">
+					<span>&#x25B4;</span>
+					year
+					<span>&#x25BE;</span>
+				</th>
+				<th ng-click="main.orderPredicate='format'; main.orderReverse=!main.orderReverse">
+					<span>&#x25B4;</span>
+					format
+					<span>&#x25BE;</span>
+				</th>
+				<th ng-click="main.orderPredicate='tracksCount'; main.orderReverse=!main.orderReverse">
+					<span>&#x25B4;</span>
+					tracks count
+					<span>&#x25BE;</span>
+				</th>
+				<th>duration</th>
+				<th>rating</th>
+				<th>description</th>
+				<th>genre</th>
+				<th>email</th>
+				<th>live</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr>
+				<td><input type="number" ng-model="main.search.id"></td>
+				<td><input type="text" ng-model="main.search.artist"></td>
+				<td><input type="text" ng-model="main.search.title"></td>
+				<td><input type="number" ng-model="main.search.year"></td>
+				<td><input type="text" ng-model="main.search.format"></td>
+				<td><input type="number" ng-model="main.search.tracksCount"></td>
+				<td><input type="number" ng-model="main.search.duration"></td>
+				<td><input type="number" ng-model="main.search.rating"></td>
+				<td><input type="text" ng-model="main.search.description"></td>
+				<td><input type="text" ng-model="main.search.genre"></td>
+				<td><input type="text" ng-model="main.search.email"></td>
+				<td><input type="" ng-model="main.search.live"></td>
+			</tr>
+			
+			<tr ng-repeat="a in main.albums | filter: main.search | orderBy: main.orderPredicate:main.orderReverse">
+				<td>{{ a.id }}</td>
+				<td>{{ a.artiste | rot13 }}</td>
+				<td>{{ a.title | uppercase }}</td>
+				<td>{{ a.year }}</td>
+				<td>{{ a.format }}</td>
+				<td>{{ a.tracksCount }}</td>
+				<td>{{ a.duration }}</td>
+				<td>{{ a.rating }}</td>
+				<td ng-click="main.selectedAlbum = a">{{ a.description | truncate }}</td>
+				<td>{{ a.genre }}</td>
+				<td>{{ a.email }}</td>
+				<td>{{ a.live }}</td>
+			</tr>
+		</tbody>
+		
+		<tfoot>
+			<tr>
+				<td>Average</td>
+				<td></td>
+				<td></td>
+				<td>{{ main.albums | pluck:'year' | average | number:0 }}</td>
+				<td></td>
+				<td>{{ main.albums | pluck:'tracksCount' | average | number:0 }}</td>
+				<td>{{ main.albums | pluck:'duration' | average | number:2 }}</td>
+				<td>{{ main.albums | pluck:'rating' | average | number:0 }}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+	
+	<h2>Dynamic</h2>
+	<div>{{ main.headers }}</div>
+	<table>
+		<thead>
+			<tr>
+				<th ng-repeat="h in main.headers">{{ h }}</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr>
+				<td ng-repeat="h in main.headers"><input></td>
+			</tr>
+			<tr ng-repeat="a in main.albums">
+				<td ng-repeat="h in main.headers" ng-switch="h">
+					<!-- avec ng-if
+					<span ng-if="h == 'title'">{{ a[h] | uppercase}}</span>
+					<span ng-if="h != 'title'">{{ a[h] }}</span> -->
+					<span ng-switch-when='artiste'>{{ a[h] | rot13 }}</span>
+					<span ng-switch-when='title'>{{ a[h] | uppercase}}</span>
+					<span ng-switch-when='description'>{{ a[h] | truncate}}</span>
+					<span ng-switch-default>{{ a[h] }}</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
