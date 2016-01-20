@@ -1,7 +1,5 @@
-app.controller('TableCtrl', function(){
-	this.albums = generateAlbums(12);
-	this.formats = formats;
-	this.genres = genres;
+app.controller('TableCtrl', function(AlbumService){
+	this.albums = AlbumService.getAlbums();
 	
 	this.headers = Object.keys(this.albums[0]);
 	

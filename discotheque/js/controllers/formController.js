@@ -1,4 +1,4 @@
-app.controller('FormCtrl', function(){
+app.controller('FormCtrl', function(formats, genres){
 	this.formats = formats;
 	this.genres = genres;
 	

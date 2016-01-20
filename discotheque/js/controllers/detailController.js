@@ -1,3 +1,3 @@
-app.controller('DetailCtrl', function($routeParams){
-	this.selectedAlbum = $routeParams.id;
+app.controller('DetailCtrl', function($routeParams, AlbumService){
+	this.selectedAlbum = AlbumService.getAlbum(Number($routeParams.id));
 })
