@@ -45,7 +45,11 @@ app.factory('AlbumService', function(formats, genres) {
 			return albums.find(x => x.id === id)
 		},
 		
-		createAlbum (album) {
+		createAlbum (album) {			
+			album.id = ++id;
+			albums.push(album);
+			
+			return album.id;
 		}
 	}
 })
