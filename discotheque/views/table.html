@@ -67,7 +67,7 @@
 				<td>{{ a.tracksCount }}</td>
 				<td>{{ a.duration }}</td>
 				<td>{{ a.rating }}</td>
-				<td ng-click="table.selectedAlbum = a">{{ a.description | truncate }}</td>
+				<td><a href="#/detail/{{ a.id }}">{{ a.description | truncate }}</a></td>
 				<td>{{ a.genre }}</td>
 				<td>{{ a.email }}</td>
 				<td>{{ a.live }}</td>
