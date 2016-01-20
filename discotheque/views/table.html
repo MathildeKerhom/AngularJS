@@ -1,34 +1,34 @@
-<input placeholder="Search in all" ng-model="main.search.$">
+<input placeholder="Search in all" ng-model="table.search.$">
 <h2>Hardcoded</h2>
 	<table>
 		<thead>
 			<tr>
-				<th ng-click="main.orderPredicate='id'; main.orderReverse=!main.orderReverse">
-					<span ng-show="main.orderPredicate=='id' && main.orderReverse == false">&#x25B4;</span>
+				<th ng-click="table.orderPredicate='id'; table.orderReverse=!table.orderReverse">
+					<span ng-show="table.orderPredicate=='id' && table.orderReverse == false">&#x25B4;</span>
 					id
-					<span ng-show="main.orderPredicate=='id' && main.orderReverse == true">&#x25BE;</span>
+					<span ng-show="table.orderPredicate=='id' && table.orderReverse == true">&#x25BE;</span>
 				</th>
-				<th ng-click="main.orderPredicate='artiste'; main.orderReverse=!main.orderReverse">
-					<span ng-show="main.orderPredicate=='artiste' && main.orderReverse == false">&#x25B4;</span>
+				<th ng-click="table.orderPredicate='artiste'; table.orderReverse=!table.orderReverse">
+					<span ng-show="table.orderPredicate=='artiste' && table.orderReverse == false">&#x25B4;</span>
 					artiste
-					<span ng-show="main.orderPredicate=='artiste' && main.orderReverse == true">&#x25BE;</span>
+					<span ng-show="table.orderPredicate=='artiste' && table.orderReverse == true">&#x25BE;</span>
 				</th>
-				<th ng-click="main.orderPredicate='title'; main.orderReverse=!main.orderReverse">
+				<th ng-click="table.orderPredicate='title'; table.orderReverse=!table.orderReverse">
 					<span>&#x25B4;</span>
 					title
 					<span>&#x25BE;</span>
 				</th>
-				<th ng-click="main.orderPredicate='year'; main.orderReverse=!main.orderReverse">
+				<th ng-click="table.orderPredicate='year'; table.orderReverse=!table.orderReverse">
 					<span>&#x25B4;</span>
 					year
 					<span>&#x25BE;</span>
 				</th>
-				<th ng-click="main.orderPredicate='format'; main.orderReverse=!main.orderReverse">
+				<th ng-click="table.orderPredicate='format'; table.orderReverse=!table.orderReverse">
 					<span>&#x25B4;</span>
 					format
 					<span>&#x25BE;</span>
 				</th>
-				<th ng-click="main.orderPredicate='tracksCount'; main.orderReverse=!main.orderReverse">
+				<th ng-click="table.orderPredicate='tracksCount'; table.orderReverse=!table.orderReverse">
 					<span>&#x25B4;</span>
 					tracks count
 					<span>&#x25BE;</span>
@@ -44,21 +44,21 @@
 		
 		<tbody>
 			<tr>
-				<td><input type="number" ng-model="main.search.id"></td>
-				<td><input type="text" ng-model="main.search.artist"></td>
-				<td><input type="text" ng-model="main.search.title"></td>
-				<td><input type="number" ng-model="main.search.year"></td>
-				<td><input type="text" ng-model="main.search.format"></td>
-				<td><input type="number" ng-model="main.search.tracksCount"></td>
-				<td><input type="number" ng-model="main.search.duration"></td>
-				<td><input type="number" ng-model="main.search.rating"></td>
-				<td><input type="text" ng-model="main.search.description"></td>
-				<td><input type="text" ng-model="main.search.genre"></td>
-				<td><input type="text" ng-model="main.search.email"></td>
-				<td><input type="" ng-model="main.search.live"></td>
+				<td><input type="number" ng-model="table.search.id"></td>
+				<td><input type="text" ng-model="table.search.artist"></td>
+				<td><input type="text" ng-model="table.search.title"></td>
+				<td><input type="number" ng-model="table.search.year"></td>
+				<td><input type="text" ng-model="table.search.format"></td>
+				<td><input type="number" ng-model="table.search.tracksCount"></td>
+				<td><input type="number" ng-model="table.search.duration"></td>
+				<td><input type="number" ng-model="table.search.rating"></td>
+				<td><input type="text" ng-model="table.search.description"></td>
+				<td><input type="text" ng-model="table.search.genre"></td>
+				<td><input type="text" ng-model="table.search.email"></td>
+				<td><input type="" ng-model="table.search.live"></td>
 			</tr>
 			
-			<tr ng-repeat="a in main.albums | filter: main.search | orderBy: main.orderPredicate:main.orderReverse">
+			<tr ng-repeat="a in table.albums | filter: table.search | orderBy: table.orderPredicate:table.orderReverse">
 				<td>{{ a.id }}</td>
 				<td>{{ a.artiste | rot13 }}</td>
 				<td>{{ a.title | uppercase }}</td>
@@ -67,7 +67,7 @@
 				<td>{{ a.tracksCount }}</td>
 				<td>{{ a.duration }}</td>
 				<td>{{ a.rating }}</td>
-				<td ng-click="main.selectedAlbum = a">{{ a.description | truncate }}</td>
+				<td ng-click="table.selectedAlbum = a">{{ a.description | truncate }}</td>
 				<td>{{ a.genre }}</td>
 				<td>{{ a.email }}</td>
 				<td>{{ a.live }}</td>
@@ -79,11 +79,11 @@
 				<td>Average</td>
 				<td></td>
 				<td></td>
-				<td>{{ main.albums | pluck:'year' | average | number:0 }}</td>
+				<td>{{ table.albums | pluck:'year' | average | number:0 }}</td>
 				<td></td>
-				<td>{{ main.albums | pluck:'tracksCount' | average | number:0 }}</td>
-				<td>{{ main.albums | pluck:'duration' | average | number:2 }}</td>
-				<td>{{ main.albums | pluck:'rating' | average | number:0 }}</td>
+				<td>{{ table.albums | pluck:'tracksCount' | average | number:0 }}</td>
+				<td>{{ table.albums | pluck:'duration' | average | number:2 }}</td>
+				<td>{{ table.albums | pluck:'rating' | average | number:0 }}</td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -93,20 +93,20 @@
 	</table>
 	
 	<h2>Dynamic</h2>
-	<div>{{ main.headers }}</div>
+	<div>{{ table.headers }}</div>
 	<table>
 		<thead>
 			<tr>
-				<th ng-repeat="h in main.headers">{{ h }}</th>
+				<th ng-repeat="h in table.headers">{{ h }}</th>
 			</tr>
 		</thead>
 		
 		<tbody>
 			<tr>
-				<td ng-repeat="h in main.headers"><input></td>
+				<td ng-repeat="h in table.headers"><input></td>
 			</tr>
-			<tr ng-repeat="a in main.albums">
-				<td ng-repeat="h in main.headers" ng-switch="h">
+			<tr ng-repeat="a in table.albums">
+				<td ng-repeat="h in table.headers" ng-switch="h">
 					<!-- avec ng-if
 					<span ng-if="h == 'title'">{{ a[h] | uppercase}}</span>
 					<span ng-if="h != 'title'">{{ a[h] }}</span> -->

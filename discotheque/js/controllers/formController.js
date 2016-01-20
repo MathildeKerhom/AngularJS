@@ -1,18 +1,12 @@
-app.controller('MainCtrl', function() {
-	this.albums = generateAlbums(12);
+app.controller('FormCtrl', function(){
 	this.formats = formats;
 	this.genres = genres;
-	
-	this.headers = Object.keys(this.albums[0]);
-	
-	this.orderPredicate = 'id';
-	this.orderReverse = false;
 	
 	this.createAlbum = function (form, album) {
 		if(form.$invalid) {
 			return;
 		}
-			
+		
 		// save album
 		var newAlbum = angular.copy(album);
 		if (!form.live.isChecked) {
@@ -20,7 +14,7 @@ app.controller('MainCtrl', function() {
 		}			
 		newAlbum.id = ++id;
 		this.albums.push(newAlbum);
-		
+	
 		// reset form
 		form.$setPristine();
 		form.$setUntouched();
@@ -28,6 +22,4 @@ app.controller('MainCtrl', function() {
 			album[k] = '';
 		})
 	}
-	
-	this.selectedAlbum = {};
 })
