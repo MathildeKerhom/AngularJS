@@ -9,12 +9,12 @@ app.config(function ($routeProvider) {
 			controllerAs: 'detail'
 		})
 		.when('/form', {
-			templateUrl: 'views/form.html'
+			templateUrl: 'views/form.html',
 			controller: 'FormCtrl',
 			controllerAs: 'form'
 		})
 		.when('/table',  {
-			templateUrl: 'views/table.html'
+			templateUrl: 'views/table.html',
 			controller: 'TableCtrl',
 			controllerAs: 'table'
 		})

@@ -34,16 +34,16 @@ app.factory('AlbumService', function(formats, genres) {
 	//public
 	return {
 		getAlbums () {
-			return this.albums;
-		}
+			return albums;
+		},
 		
 		getAlbum (id) {
 			/*return this.albums.find(function(album) {
 				return album.id === id;
 			})*/
 			
-			return this.albums.find(x => x.id === id;)
-		}
+			return albums.find(x => x.id === id)
+		},
 		
 		createAlbum (album) {
 		}
