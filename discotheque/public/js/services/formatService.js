@@ -1,0 +1,1 @@
+app.value('formats', ['CD', 'Vinyl', 'K7'])

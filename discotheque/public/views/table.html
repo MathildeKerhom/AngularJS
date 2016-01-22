@@ -1,0 +1,120 @@
+<input placeholder="Search in all" ng-model="table.search.$">
+<h2>Hardcoded</h2>
+	<table>
+		<thead>
+			<tr>
+				<th ng-click="table.orderPredicate='id'; table.orderReverse=!table.orderReverse">
+					<span ng-show="table.orderPredicate=='id' && table.orderReverse == false">&#x25B4;</span>
+					id
+					<span ng-show="table.orderPredicate=='id' && table.orderReverse == true">&#x25BE;</span>
+				</th>
+				<th ng-click="table.orderPredicate='artiste'; table.orderReverse=!table.orderReverse">
+					<span ng-show="table.orderPredicate=='artiste' && table.orderReverse == false">&#x25B4;</span>
+					artiste
+					<span ng-show="table.orderPredicate=='artiste' && table.orderReverse == true">&#x25BE;</span>
+				</th>
+				<th ng-click="table.orderPredicate='title'; table.orderReverse=!table.orderReverse">
+					<span>&#x25B4;</span>
+					title
+					<span>&#x25BE;</span>
+				</th>
+				<th ng-click="table.orderPredicate='year'; table.orderReverse=!table.orderReverse">
+					<span>&#x25B4;</span>
+					year
+					<span>&#x25BE;</span>
+				</th>
+				<th ng-click="table.orderPredicate='format'; table.orderReverse=!table.orderReverse">
+					<span>&#x25B4;</span>
+					format
+					<span>&#x25BE;</span>
+				</th>
+				<th ng-click="table.orderPredicate='tracksCount'; table.orderReverse=!table.orderReverse">
+					<span>&#x25B4;</span>
+					tracks count
+					<span>&#x25BE;</span>
+				</th>
+				<th>duration</th>
+				<th>rating</th>
+				<th>description</th>
+				<th>genre</th>
+				<th>email</th>
+				<th>live</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr>
+				<td><input type="number" ng-model="table.search.id"></td>
+				<td><input type="text" ng-model="table.search.artist"></td>
+				<td><input type="text" ng-model="table.search.title"></td>
+				<td><input type="number" ng-model="table.search.year"></td>
+				<td><input type="text" ng-model="table.search.format"></td>
+				<td><input type="number" ng-model="table.search.tracksCount"></td>
+				<td><input type="number" ng-model="table.search.duration"></td>
+				<td><input type="number" ng-model="table.search.rating"></td>
+				<td><input type="text" ng-model="table.search.description"></td>
+				<td><input type="text" ng-model="table.search.genre"></td>
+				<td><input type="text" ng-model="table.search.email"></td>
+				<td><input type="" ng-model="table.search.live"></td>
+			</tr>
+			
+			<tr ng-repeat="a in table.albums | filter: table.search | orderBy: table.orderPredicate:table.orderReverse">
+				<td>{{ a.id }}</td>
+				<td>{{ a.artiste | rot13 }}</td>
+				<td>{{ a.title | uppercase }}</td>
+				<td>{{ a.year }}</td>
+				<td>{{ a.format }}</td>
+				<td>{{ a.tracksCount }}</td>
+				<td>{{ a.duration }}</td>
+				<td>{{ a.rating }}</td>
+				<td><a href="#/detail/{{ a.id }}">{{ a.description | truncate }}</a></td>
+				<td>{{ a.genre }}</td>
+				<td>{{ a.email }}</td>
+				<td>{{ a.live }}</td>
+			</tr>
+		</tbody>
+		
+		<tfoot>
+			<tr>
+				<td>Average</td>
+				<td></td>
+				<td></td>
+				<td>{{ table.albums | pluck:'year' | average | number:0 }}</td>
+				<td></td>
+				<td>{{ table.albums | pluck:'tracksCount' | average | number:0 }}</td>
+				<td>{{ table.albums | pluck:'duration' | average | number:2 }}</td>
+				<td>{{ table.albums | pluck:'rating' | average | number:0 }}</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+	
+	<h2>Dynamic</h2>
+	<div>{{ table.headers }}</div>
+	<table>
+		<thead>
+			<tr>
+				<th ng-repeat="h in table.headers">{{ h }}</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr>
+				<td ng-repeat="h in table.headers"><input></td>
+			</tr>
+			<tr ng-repeat="a in table.albums">
+				<td ng-repeat="h in table.headers" ng-switch="h">
+					<!-- avec ng-if
+					<span ng-if="h == 'title'">{{ a[h] | uppercase}}</span>
+					<span ng-if="h != 'title'">{{ a[h] }}</span> -->
+					<span ng-switch-when='artiste'>{{ a[h] | rot13 }}</span>
+					<span ng-switch-when='title'>{{ a[h] | uppercase}}</span>
+					<span ng-switch-when='description'>{{ a[h] | truncate}}</span>
+					<span ng-switch-default>{{ a[h] }}</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
