@@ -1,1 +1,0 @@
-app.value('genres', ['Classic', 'Pop', 'Rock', 'Country', 'Rap'])
